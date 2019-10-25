@@ -1,0 +1,8 @@
+{
+  "name": "backend-shoes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jorginhoad/backend-shoes.git",
+  "author": "Jorge Guimarães <jorgeguimaraes@cinbesa.com.br>",
+  "license": "MIT"
+}
