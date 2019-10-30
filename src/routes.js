@@ -1,15 +1,25 @@
 import { Router } from 'express';
-import User from './app/models/User';
+import UserController from './app/controllers/UserController';
 
 const routes = new Router();
 
-routes.get('/', async (req, res) => {
-  const user = await User.create({
-    name: 'Jorge Guimarães',
-    email: 'jorginhoad@gmail.com',
-    password_hash: '123456',
-  });
-  return res.json(user);
-});
+const teste = (req, res, next) => {
+  const { isloged } = req.headers;
+
+  if (!isloged) {
+    return res.status(400).json({ error: 'usuário não logado!' });
+  }
+
+  return next();
+};
+// Middleware verifica se tá logado
+routes.use(teste);
+
+//Routes User
+// routes.get('/user', UserController.index);
+routes.post('/user', UserController.store);
+// routes.post('/user/:id', UserController.show);
+// routes.put('/user/:id', UserController.update);
+// routes.delete('/user/:id', UserController.delete);
 
 export default routes;
