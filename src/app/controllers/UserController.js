@@ -9,14 +9,14 @@ class UserController {
     const userExist = await User.findOne({ where: { email: req.body.email } });
 
     if (userExist) {
-      return res.status(401).json({
-        error: `Email ${userExist.email} já cadastrado na base para o usuário ${userExist.name}`,
+      return res.status(400).json({
+        error: `Usuário já existe`,
       });
     }
 
-    const user = await User.create(req.body);
+    const { id, name, email, provider } = await User.create(req.body);
 
-    return await res.json(user);
+    return res.json({ id, name, email, provider });
   }
 
   //   async show(req, res) {
