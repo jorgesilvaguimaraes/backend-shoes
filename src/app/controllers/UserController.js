@@ -23,9 +23,9 @@ class UserController {
   //     return await res.json({ msg: 'show' });
   //   }
 
-  //   async update(req, res) {
-  //     return await res.json({ msg: 'update' });
-  //   }
+  async update(req, res) {
+    return await res.json({ msg: `usuário logado id: ${req.userId}` });
+  }
 
   //   async delete(req, res) {
   //     return await res.json({ msg: 'delete' });

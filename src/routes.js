@@ -1,29 +1,21 @@
 import { Router } from 'express';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
+import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 
-const teste = (req, res, next) => {
-  const { isloged } = req.headers;
-
-  if (!isloged) {
-    return res.status(400).json({ error: 'usuário não logado!' });
-  }
-
-  return next();
-};
-
+// Routes Free
 routes.post('/sessions', SessionController.store);
+routes.post('/users', UserController.store);
 
 // Middleware verifica se tá logado
-routes.use(teste);
+routes.use(authMiddleware);
 
 // Routes Users
+routes.put('/users', UserController.update);
 // routes.get('/user', UserController.index);
-routes.post('/users', UserController.store);
 // routes.post('/users/:id', UserController.show);
-// routes.put('/users/:id', UserController.update);
 // routes.delete('/users/:id', UserController.delete);
 
 export default routes;
